@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="is-dark-theme">
     <h1>Pokégame</h1>
   </header>
   <div class="game-control-buttons">
@@ -25,7 +25,7 @@
     <button id="start" class="start button nes-btn is-success" onclick="startGameLoop(event)">Start</button>
     <div class="difficulty-select">
       <label for="default_select">Difficulty Select</label>
-      <div class="nes-select">
+      <div class="nes-select is-dark-theme">
         <select required id="difficulty-select">
           <option value="0" selected>Easy</option>
           <option value="1">Medium</option>
@@ -34,6 +34,10 @@
         </select>
       </div>
     </div>
+    <label>
+      <input type="checkbox" class="nes-checkbox is-dark-theme" onchange="darkTheme(event)" />
+      <span>Dark Theme</span>
+    </label>
   </div>
   <div id="progress-bars" style="display: none">
     <p>Score</p>
@@ -42,11 +46,11 @@
     <progress class="nes-progress is-error" value="0" max="100" id="timer"></progress>
   </div>
   <div id="countdown"></div>
-  <div class="nes-container" id="cards-container">
+  <div class="nes-container is-dark-theme" id="cards-container">
     <p>Choose a difficulty and press 'Start' to play!</p>
   </div>
   <h1 id="bonus-time">+ BONUS TIME</h1>
-  <dialog class="nes-dialog" id="loss-modal">
+  <dialog class="nes-dialog is-rounded is-dark-theme" id="loss-modal">
     <form method="dialog">
       <h1>You LOST!</h1>
       <h3>Final Score: <span id="loss-final-score"></span></h3>
@@ -57,7 +61,7 @@
       </menu>
     </form>
   </dialog>
-  <dialog class="nes-dialog" id="win-modal">
+  <dialog class="nes-dialog is-rounded is-dark-theme" id="win-modal">
     <form method="dialog">
       <h1>You WON!</h1>
       <h3>Final Score: <span id="win-final-score"></span></h3>

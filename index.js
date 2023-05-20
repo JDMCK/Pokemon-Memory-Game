@@ -231,3 +231,16 @@ const playAgain = () => {
 
   startGameLoop();
 }
+
+const darkTheme = (event) => {
+  const elements = document.querySelectorAll('.is-dark-theme');
+  elements.forEach(element => element.classList.toggle('is-dark'));
+  if (event.target.checked) {
+    document.body.style.backgroundColor = 'rgb(33,37,41)';
+    document.body.style.color = 'white';
+  } else {
+    document.body.style.backgroundColor = 'white';
+    document.body.style.color = '';
+
+  }
+}
