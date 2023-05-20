@@ -1,0 +1,101 @@
+header {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#countdown {
+  text-align: center;
+  font-size: 10em;
+  margin-top: 5rem;
+}
+
+.game-control-buttons {
+  margin: auto;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  max-width: 50rem;
+}
+
+.button {
+  height: 3rem;
+}
+
+#cards-container {
+  margin: auto;
+  margin-top: 1rem;
+  width: min-content;
+  min-width: 30rem;
+  display: grid;
+}
+
+#progress-bars {
+  margin: auto;
+  margin-top: 1rem;
+  max-width: 65%;
+}
+
+#progress-bars progress {
+  height: 1.5rem;
+}
+
+.small-sprite img {
+  width: 8rem;
+}
+
+.medium-sprite img {
+  width: 11rem;
+}
+
+.large-sprite img {
+  width: 14rem;
+}
+
+.pokemon-card img {
+  transition: transform 0.75s;
+}
+
+.back-face {
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+.front-face {
+  backface-visibility: hidden;
+}
+
+.flipped .back-face {
+  transform: rotate(0deg);
+}
+
+.flipped .front-face {
+  transform: rotateY(180deg);
+}
+
+form {
+  text-align: center;
+}
+
+#bonus-time {
+  display: none;
+  position: absolute;
+  top: 15rem;
+  right: 7rem;
+  transform: rotate(30deg);
+  opacity: 1;
+  animation: fade-out 2s;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-3rem) rotate(30deg);
+  }
+}
