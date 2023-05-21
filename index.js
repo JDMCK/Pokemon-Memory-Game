@@ -47,10 +47,13 @@ const generateCards = async () => {
   }
   let pokemon = shuffle(pokemonResponse.results).slice(0, cardsNum / 2);
   pokemon = pokemon.concat(pokemon);
-  pokemon = shuffle(pokemon);
+  shuffle(pokemon);
 
   const cardsContainer = document.querySelector('#cards-container');
   cardsContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+  outOf.innerHTML = `0/${cardsNum / 2}`;
+  document.querySelector('#remaining').innerHTML = cardsNum / 2 + ' remaining!'
 
   let cards = '';
   pokemon.forEach(async pokemon => {
@@ -75,6 +78,8 @@ const countdown = () => {
   const progressBars = document.querySelector('#progress-bars');
   progressBars.style.display = 'block';
 
+  timerText.innerHTML = duration + 's';
+
   const cardContainer = document.querySelector('#cards-container');
   cardContainer.style.display = 'none';
 
@@ -98,7 +103,6 @@ const countdown = () => {
         case '2': showAllCards(4); break;
         case '3': showAllCards(3); break;
       }
-
     }
   }, 750);
 }
@@ -116,20 +120,13 @@ const showAllCards = (durationSeconds) => {
 }
 
 const beginTimer = () => {
-  let duration = 0;
-
-  switch (difficulty) {
-    case '0': duration = 10; break;
-    case '1': duration = 20; break;
-    case '2': duration = 50; break;
-    case '3': duration = 35; break;
-  }
 
   const lossModal = document.querySelector('#loss-modal');
   const winModal = document.querySelector('#win-modal');
 
   const timerInterval = setInterval(() => {
-    timer.value += (24 / 60) / duration;
+    timer.value -= (24 / 60) / duration;
+    timerText.innerHTML = `${Math.ceil(duration * timer.value / 100)}s`;
 
     if (score >= 100) {
       clearInterval(timerInterval);
@@ -137,7 +134,7 @@ const beginTimer = () => {
       winModal.showModal();
     }
 
-    if (timer.value >= 100) {
+    if (timer.value <= 0) {
       clearInterval(timerInterval);
       document.querySelector('#loss-final-score').innerHTML = score > 100 ? 100 : score;
       lossModal.showModal();
@@ -152,6 +149,10 @@ const flip = (event) => {
   if (classes.contains('flipped') || pendingFlipped > 2) return;
   card.classList.toggle('flipped');
   flippedCards.push(card);
+
+  const clicksDisplay = document.querySelector('#clicks-display');
+  clicks++;
+  clicksDisplay.innerHTML = 'Clicks: ' + clicks;
 
   if (pendingFlipped === 2) {
     if (flippedCards[0].dataset.pokemon === flippedCards[1].dataset.pokemon) {
@@ -171,6 +172,9 @@ const flip = (event) => {
 
 const progress = () => {
   const scoreBar = document.querySelector('#score');
+  pairsMade++;
+  outOf.innerHTML = `${pairsMade}/${cardsNum / 2}`;
+  document.querySelector('#remaining').innerHTML = (cardsNum / 2 - pairsMade) + ' remaining!';
   score += Math.ceil(100 / (cardsNum / 2))
   scoreBar.value = score;
   powerUp();
@@ -184,7 +188,7 @@ const powerUp = () => {
     setTimeout(() => {
       bonusTime.style.display = 'none';
     }, 2000);
-    timer.value -= 15;
+    timer.value += (5 / duration) * 100;
   }
 }
 
@@ -196,7 +200,12 @@ let difficulty = '0';
 let pendingFlipped = 0;
 let flippedCards = [];
 let cardsNum = 24;
+let pairsMade = 0;
+let clicks = 0;
+let duration = 0;
 const timer = document.querySelector('#timer');
+const outOf = document.querySelector('#out-of');
+const timerText = document.querySelector('#timer-text');
 
 const startGameLoop = () => {
   // Setup
@@ -208,6 +217,14 @@ const startGameLoop = () => {
   difficultySelect.classList.toggle('is-disabled');
 
   difficulty = document.querySelector('#difficulty-select').value;
+
+  switch (difficulty) {
+    case '0': duration = 10; break;
+    case '1': duration = 20; break;
+    case '2': duration = 50; break;
+    case '3': duration = 35; break;
+  }
+
   generateCards();
 
   // Begin gameplay interval chain
@@ -224,7 +241,9 @@ const playAgain = () => {
   isWin = false;
   pendingFlipped = 0;
   flippedCards = [];
-  timer.value = 0;
+  timer.value = 100;
+  pairsMade = 0;
+  duration = 0;
 
   document.querySelector('#score').value = 0;
   document.querySelector('#countdown').style.display = 'block';

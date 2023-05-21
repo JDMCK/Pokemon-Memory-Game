@@ -99,3 +99,7 @@ form {
     transform: translateY(-3rem) rotate(30deg);
   }
 }
+
+#remaining {
+  margin-left: 2rem;
+}

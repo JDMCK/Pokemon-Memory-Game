@@ -40,10 +40,11 @@
     </label>
   </div>
   <div id="progress-bars" style="display: none">
-    <p>Score</p>
+    <p>Score: <span id="out-of"></span><span id="remaining"></span></p>
     <progress class="nes-progress is-primary" value="0" max="100" id="score"></progress>
-    <p>Timer</p>
-    <progress class="nes-progress is-error" value="0" max="100" id="timer"></progress>
+    <p>Timer: <span id="timer-text"></span></p>
+    <progress class="nes-progress is-error" value="100" max="100" id="timer"></progress>
+    <span id="clicks-display">Clicks: 0</span>
   </div>
   <div id="countdown"></div>
   <div class="nes-container is-dark-theme" id="cards-container">
