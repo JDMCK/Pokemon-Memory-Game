@@ -145,8 +145,9 @@ const beginTimer = () => {
 const flip = (event) => {
   const card = event.target.parentElement;
   const classes = card.classList;
+  if (classes.contains('flipped')) return;
   pendingFlipped++;
-  if (classes.contains('flipped') || pendingFlipped > 2) return;
+  if (pendingFlipped > 2) return;
   card.classList.toggle('flipped');
   flippedCards.push(card);
 
