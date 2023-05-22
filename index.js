@@ -6,19 +6,19 @@ const fetchPokemon = async (url) => {
 const pokemonPromise = fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=151');
 
 function shuffle(array) {
-  // Fisher-Yates shuffle algorithm
-  var m = array.length, t, i;
+  let currentIndex = array.length;
+  let randomIndex;
 
-  // While there remain elements to shuffle…
-  while (m) {
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
 
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
     // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
   }
 
   return array;
@@ -47,7 +47,8 @@ const generateCards = async () => {
   }
   let pokemon = shuffle(pokemonResponse.results).slice(0, cardsNum / 2);
   pokemon = pokemon.concat(pokemon);
-  shuffle(pokemon);
+  pokemon = shuffle(pokemon);
+
 
   const cardsContainer = document.querySelector('#cards-container');
   cardsContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
