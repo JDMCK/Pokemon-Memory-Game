@@ -49,7 +49,6 @@ const generateCards = async () => {
   pokemon = pokemon.concat(pokemon);
   pokemon = shuffle(pokemon);
 
-
   const cardsContainer = document.querySelector('#cards-container');
   cardsContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
@@ -57,16 +56,16 @@ const generateCards = async () => {
   document.querySelector('#remaining').innerHTML = cardsNum / 2 + ' remaining!'
 
   let cards = '';
-  pokemon.forEach(async pokemon => {
-    const pokemonInfo = await fetchPokemon(pokemon.url);
+  for (const p of pokemon) {
+    const pokemonInfo = await fetchPokemon(p.url);
     const pokemonSprite = pokemonInfo.sprites.other['official-artwork'].front_default;
     cards += `
-    <div data-pokemon="${pokemon.name}" class="pokemon-card nes-pointer ${sizeClass}" onclick="flip(event)">
-    <img class="pokemon-sprite back-face"src=${pokemonSprite} />
-    <img class="pokeball-sprite front-face" src=${pokeball} />
+    <div data-pokemon="${p.name}" class="pokemon-card nes-pointer ${sizeClass}" onclick="flip(event)">
+      <img class="pokemon-sprite back-face" src=${pokemonSprite} />
+      <img class="pokeball-sprite front-face" src=${pokeball} />
     </div>`;
-    cardsContainer.innerHTML = cards;
-  })
+  }
+  cardsContainer.innerHTML = cards;
 }
 
 const countdown = () => {
