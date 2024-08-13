@@ -1,11 +1,9 @@
-**Pokemon Memory Game**
-
-https://jdmck-pokegame.netlify.app/
-
-![pokegame-example](https://github.com/JDMCK/COMP2537-assignment4/blob/main/pokegame.png)
-
-**Description:**
+# Pokemon Memory Game
 Pokemon Memory Game is a fun and nostalgic web-based game inspired by the retro NES games. Test your memory and try to match pairs of hidden Pokemon by flipping pokeballs. The game offers four difficulty levels, providing a challenge for players of all skill levels.
+
+You can play the game [here](https://jdmck-pokegame.netlify.app/)!
+
+![pokemon-memory-game](https://github.com/user-attachments/assets/96115a7b-87d5-4008-ae83-57f3ebddc646)
 
 **Features:**
 - Retro NES Styling: The game is designed with a nostalgic retro NES-inspired interface, reminiscent of classic video games.
@@ -15,7 +13,7 @@ Pokemon Memory Game is a fun and nostalgic web-based game inspired by the retro 
 - Timer: Challenge yourself by completing the game within a time limit. The timer adds an extra layer of excitement.
 
 **Requirements:**
-To play the game, you need a modern web browser with JavaScript enabled.
+- To play the game, you need a modern web browser with JavaScript enabled.
 
 **How to Play:**
 1. Launch the game by opening the provided URL in your web browser.
